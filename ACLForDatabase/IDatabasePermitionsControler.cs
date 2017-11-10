@@ -6,6 +6,6 @@ namespace ACLForDatabase
         void AddPermitionToUser(SqlConnection databaseConnectionb, SqlCommand selectQuerryRecordsToBeadded);
         void RemovePermitionFromUser(SqlConnection databaseConnection, SqlCommand selectQuerryRecordsToBeRemoved);
         void AddAclColumnToTable(SqlConnection databaseConnection, string tableName);
+        void RemoveAclColumnToTable(SqlConnection databaseConnection, string tableName);
     }
-    
 }

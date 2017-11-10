@@ -42,7 +42,8 @@
   <ItemGroup>
     <Compile Include="IDatabaseUser.cs" />
     <Compile Include="IDatabaseAdmin.cs" />
-    <Compile Include="IPermitions.cs" />
+    <Compile Include="IDatabasePermitionsControler.cs" />
+    <Compile Include="IUsersPermitionsTree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
