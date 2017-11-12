@@ -1,4 +1,6 @@
-﻿using System;
+﻿///Class for test function
+
+using System;
 
 namespace ACLForDatabase{
     public class main{
