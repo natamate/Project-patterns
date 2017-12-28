@@ -40,10 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBConnection.cs" />
     <Compile Include="IDatabaseUser.cs" />
     <Compile Include="IDatabaseAdmin.cs" />
     <Compile Include="IDatabasePermitionsControler.cs" />
     <Compile Include="IUsersPermitionsTree.cs" />
+    <Compile Include="main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
