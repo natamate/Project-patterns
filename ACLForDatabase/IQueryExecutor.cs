@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,7 @@ namespace ACLForDatabase
 {
     public interface IQueryExecutor
     {
-        // should be more generic return type!!!
-        [AuthorisationAspect]
-        MySqlDataReader ExecuteQuery(string queryText, IDBUser user, MySqlConnection connection);
+        //[AuthorisationAspect]
+        DataTable ExecuteQuery(string queryText, IDBUser user, MySqlConnection connection);
     }
 }

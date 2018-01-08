@@ -8,7 +8,8 @@ namespace ACLForDatabase
 {
     public enum DBPrivilegeType
     {
-        ViewOnly = 1,
-        Edition = 2
+        Select = 1,
+        SelectAndUpdate = 2,
+        SelectUpdateDelete = 4
     }
 }
