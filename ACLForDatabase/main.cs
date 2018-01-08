@@ -13,8 +13,9 @@ namespace ACLForDatabase{
             if (conn1.connect() == false){
                 Console.WriteLine("You are not in connection. Please check your instances");
             }else{
-                //Do something here
+                Console.WriteLine("Connection ok");
             }
+          
         }
     }
 }
