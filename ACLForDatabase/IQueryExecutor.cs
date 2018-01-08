@@ -12,6 +12,6 @@ namespace ACLForDatabase
     public interface IQueryExecutor
     {
         //[AuthorisationAspect]
-        DataTable ExecuteQuery(string queryText, IDBUser user, MySqlConnection connection);
+        DataTable ExecuteQuery(string queryText, IDBUser user);
     }
 }
