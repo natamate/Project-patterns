@@ -12,21 +12,21 @@ namespace ACLForDatabase{
         private string server;
         private string userName;
         private string database;
+
+        public DBConnection(string server, string database, string userName, string password)
+        {
+            this.server = server;
+            this.database = database;
+            this.userName = userName;
+            this.password = password;
+        }
+
         public MySqlConnection Conn { get; private set; }
         /// Attributies to check whether or not connecting
         private string connString;
         private bool status;
 
-        /// Contructor with plank String and status is "not connecting"
-        public DBConnection(){
-            password = string.Empty;
-            server = string.Empty;
-            userName = string.Empty;
-            database = string.Empty;
-            connString = string.Empty;
-            connString = string.Empty;
-            status = false;
-        }
+        
         
         /// Private method whose purpose is to connect parts of necessary arguments to connection string
         private void createConnectionString(){

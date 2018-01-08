@@ -13,7 +13,6 @@ namespace ACLForDatabase
         /// </summary>
         int RoleID { get; }
         string RoleName { get; }
-        // to change returning type
-        IDBRole ParentRole { get; }
+        IList<IDBRole> ChildrenRoles { get; }
     }
 }

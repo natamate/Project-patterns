@@ -1,7 +1,4 @@
-﻿using System.Data.SqlClient;
-using System.Dynamic;
-using Castle.DynamicProxy;
-using MySql.Data.MySqlClient;
+﻿
 
 namespace ACLForDatabase
 {   
@@ -10,9 +7,5 @@ namespace ACLForDatabase
         int UserId { get;}
         string UserName { get; }
         IDBRole UserRole { get; }
-
-        SqlDataReader ExecuteUserQuery(SqlConnection dbConnection,
-                                       SqlCommand command, 
-                                       DbPrivilegeType neededPrivilege);
     }
 }

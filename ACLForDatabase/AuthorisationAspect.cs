@@ -4,17 +4,18 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Castle.DynamicProxy;
+using PostSharp.Aspects;
 
 namespace ACLForDatabase
 {
-    class AuthorisationAspect : IInterceptor
+    [Serializable]
+    public class AuthorisationAspect : MethodInterceptionAspect
     {
-        public void Intercept(IInvocation invocation)
+        public override void OnInvoke(MethodInterceptionArgs args)
         {
-            
-
-            throw new NotImplementedException();
+            var statement = args.Arguments[0];
+            var userName = args.Arguments[1];
+            args.Proceed();
         }
     }
 }
