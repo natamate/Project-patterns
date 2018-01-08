@@ -54,12 +54,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorisationAspect.cs" />
+    <Compile Include="MySqlQueryExecutor.cs" />
     <Compile Include="IDBRole.cs" />
     <Compile Include="DbPrivilegeType.cs" />
     <Compile Include="DBConnection.cs" />
     <Compile Include="IDBUser.cs" />
     <Compile Include="IDBAdmin.cs" />
     <Compile Include="IDBPrivilegesController.cs" />
+    <Compile Include="IQueryExecutor.cs" />
     <Compile Include="MainClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

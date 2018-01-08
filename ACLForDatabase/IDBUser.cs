@@ -7,5 +7,6 @@ namespace ACLForDatabase
         int UserId { get;}
         string UserName { get; }
         IDBRole UserRole { get; }
+
     }
 }
