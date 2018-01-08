@@ -11,11 +11,13 @@ namespace ACLForDatabase
 {
     class MySqlQueryExecutor : IQueryExecutor
     {
+        // connection must be opened before
         [AuthorisationAspect]
-        public SqlDataReader ExecuteQuery(string queryText, IDBUser user)
+        public MySqlDataReader ExecuteQuery(string commandText, IDBUser user, MySqlConnection connection)
         {
+            var mySqlCommand = new MySqlCommand(commandText, connection);
 
-            return null;
+            return mySqlCommand.ExecuteReader();
         }
     }
 }

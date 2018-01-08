@@ -5,7 +5,7 @@ namespace ACLForDatabase
 {
     public interface IDBPrivilegesController
     {
-        void AddPrivilegesToRole(SqlConnection connection, DbPrivilegeType privileges);
+        void AddPrivilegesToRole(SqlConnection connection, DBPrivilegeType privileges);
         void RemovePrivilegeFromRole(SqlConnection connection, IDBRole role, 
                                      SqlCommand sqlCommand);
     }
