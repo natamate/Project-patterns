@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using PostSharp;
 
 namespace ACLForDatabase
 {
@@ -26,6 +19,7 @@ namespace ACLForDatabase
 
             var mySqlCommand = new MySqlCommand(commandText, _connection);
             var dbResponse = new DataTable();
+
             _connection.Open();
             dbResponse.Load(mySqlCommand.ExecuteReader());
             _connection.Close();

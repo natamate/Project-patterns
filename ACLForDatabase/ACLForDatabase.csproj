@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorisationAspect.cs" />
+    <Compile Include="MySqlAdmin.cs" />
     <Compile Include="MySqlQueryExecutor.cs" />
     <Compile Include="IDBRole.cs" />
     <Compile Include="DBPrivilegeType.cs" />
@@ -63,6 +64,8 @@
     <Compile Include="IDBPrivilegesController.cs" />
     <Compile Include="IQueryExecutor.cs" />
     <Compile Include="MainClass.cs" />
+    <Compile Include="MySqlRole.cs" />
+    <Compile Include="MySqlUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

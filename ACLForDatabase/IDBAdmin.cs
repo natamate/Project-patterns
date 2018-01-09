@@ -8,6 +8,6 @@ namespace ACLForDatabase
         void AssignRoleToUser(IDBUser user, IDBRole role);
         void RenameUser(IDBUser user);
         void AddDatabaseUser(IDBUser user);
-        IEnumerable<IDBUser> GetUsers(SqlConnection databaseConnectionb);
+        //IEnumerable<IDBUser> GetUsers(SqlConnection databaseConnectionb);
     }
 }

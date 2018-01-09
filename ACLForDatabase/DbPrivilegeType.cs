@@ -10,6 +10,6 @@ namespace ACLForDatabase
     {
         Select = 1,
         SelectAndUpdate = 2,
-        SelectUpdateDelete = 4
+        SelectUpdateInsertDelete = 4
     }
 }
