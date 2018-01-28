@@ -8,17 +8,23 @@ namespace ACLForDatabase
 {
     public class MySqlUser : IDBUser
     {
-        private MySqlUser(int userId, string userName, IDBRole userRole, bool isAdmin)
+        private bool _admin = false;
+
+        public MySqlUser(int userId, string userName, IDBRole userRole, bool isAdmin)
         {
             UserId = userId;
             UserName = userName;
             UserRole = userRole;
-            IsAdmin = isAdmin;
+            _admin = isAdmin;
         }
 
         public int UserId { get; }
         public string UserName { get; }
         public IDBRole UserRole { get; }
-        public bool IsAdmin { get; }
+
+        public bool IsAdmin()
+        {
+            return _admin;
+        }
     }
 }

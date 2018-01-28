@@ -11,11 +11,16 @@ namespace ACLForDatabase
     class MySqlAdmin : IDBAdmin, IDBUser
     {
         private static MySqlAdmin _instance;
+        private bool _admin;
 
         public int UserId { get; }
         public string UserName { get; }
         public IDBRole UserRole { get; }
-        public bool IsAdmin { get; }
+
+        public bool IsAdmin()
+        {
+            return _admin;
+        }
         public static MySqlAdmin Instance => _instance ?? new MySqlAdmin();
         
         private MySqlAdmin()
