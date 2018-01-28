@@ -2,6 +2,7 @@
 
 using System;
 using SimpleInjector;
+using System.Data;
 
 namespace ACLForDatabase{
     public class MainClass{
@@ -11,18 +12,20 @@ namespace ACLForDatabase{
             // Go look in all assemblies and register all implementations
             // of ICommandExecutor<T> by their closed interface:
             container.Register(typeof(ICommandExecutor<>),
-                AppDomain.CurrentDomain.GetAssemblies());
+                new[] { typeof(ICommandExecutor<>).Assembly });
 
             // Decorates all executors with an authorization decorator.
             container.RegisterDecorator(typeof(ICommandExecutor<>),
                 typeof(AuthorizationCommandExecutorDecorator<>));
+
+            container.Verify();
 
             var server = "mysql.agh.edu.pl";
             var password = "nLrCdGx7nDhP5ymQ";
             var userName = "marcjaku";
             var database = "marcjaku";
 
-            var role = new  MySqlRole(1,"manager",null);
+            var role = new  MySqlRole(6,"director",null);
             var user = new MySqlUser(1,"Zdzisek",role,false);
 
             using (DBConnection conn1 = new DBConnection(server, database, userName, password))
@@ -34,11 +37,17 @@ namespace ACLForDatabase{
                 else
                 {
                     Console.WriteLine("Connection ok");
-                    var command = new MySqlCommand("select example from templateTable;", user);
-                    var commandExecutor = new MySqlCommandExecutor(conn1.Connection);
+                    var command = new MySqlCommand("select * from templateTable;", user);
+                    var commandExecutor = container.GetInstance<MySqlCommandExecutor>();
+                    commandExecutor.Connection = conn1.Connection;
+
+
                     var res = commandExecutor.Execute(command);
 
-                    System.Console.WriteLine(res.Rows.GetEnumerator().Current);
+                    foreach (DataRow row in res.Rows)
+                    {
+                        Console.WriteLine(row.Field<string>(2));
+                    }
                     System.Console.ReadLine();
                 }
             }

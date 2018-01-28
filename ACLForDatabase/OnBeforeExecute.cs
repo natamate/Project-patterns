@@ -12,7 +12,7 @@ namespace ACLForDatabase
     {
         // there is only example part of code
         private readonly string regexToIdentifySelect =
-            "(.*select +from.*?)(where)|(group|having|order.*)";
+            "(.*select +from.*?)(;)";
         // TO CHANGE
         private readonly string regexToIdentifyEditionPerms =
             "(update)|(delete)";
@@ -54,10 +54,11 @@ namespace ACLForDatabase
             if (match.Success)
             {
                 var beginningPart = match.Groups[1].Value;
-                var endingPart = match.Groups[3].Value;
-                var joinPart = " natural join permisions r ";
-                var wherePart = "where roleId = (select roleId from roles where name='" + role.RoleName +
-                                "') and selectPermision=1 ";
+                var endingPart = match.Groups[2].Value;
+                var joinPart = " natural join permisions as p ";
+                var wherePart = "where p.roleId in (SELECT node.roleId FROM roles AS parent, roles AS node " +
+                    "WHERE node.lft BETWEEN parent.lft AND parent.rgt " +
+                    "AND parent.name = '" + role.RoleName + "') and selectPermission = 1";
                 var result = beginningPart + joinPart + wherePart;
 
                 if (commandText.Contains("where"))

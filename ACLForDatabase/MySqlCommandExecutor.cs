@@ -6,16 +6,11 @@ namespace ACLForDatabase
 {
     public class MySqlCommandExecutor : ICommandExecutor<MySqlCommand>
     {
-        private readonly MySqlConnection _connection;
-
-        public MySqlCommandExecutor(MySqlConnection connection)
-        {
-            _connection = connection ?? throw new ArgumentNullException(nameof(connection));
-        }
+        public MySqlConnection Connection { get; set; }
 
         public DataTable Execute(MySqlCommand command)
         {
-            var mySqlCommand = new MySql.Data.MySqlClient.MySqlCommand(command.CommandText, _connection);
+            var mySqlCommand = new MySql.Data.MySqlClient.MySqlCommand(command.CommandText, Connection);
             var dbResponse = new DataTable();
 
             //_connection.Open();
