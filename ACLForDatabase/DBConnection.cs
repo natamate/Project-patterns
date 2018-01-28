@@ -29,10 +29,10 @@ namespace ACLForDatabase{
         
         /// Private method whose purpose is to connect parts of necessary arguments to connection string
         private void CreateConnectionString(){
-            _connString = "Server="+Server
-                                +";Database="+Database
-                                +";uid="+UserName
-                                +";Password="+Password;
+            _connString = "SERVER="+Server
+                                +";DATABASE="+Database
+                                +";UID="+UserName
+                                +";PASSWORD="+Password+";";
         }
 
         /// make a connect to mySql and open it to new queries

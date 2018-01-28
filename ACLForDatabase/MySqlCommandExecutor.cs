@@ -18,9 +18,9 @@ namespace ACLForDatabase
             var mySqlCommand = new MySql.Data.MySqlClient.MySqlCommand(command.CommandText, _connection);
             var dbResponse = new DataTable();
 
-            _connection.Open();
+            //_connection.Open();
             dbResponse.Load(mySqlCommand.ExecuteReader());
-            _connection.Close();
+            //_connection.Close();
 
             return dbResponse;
         }

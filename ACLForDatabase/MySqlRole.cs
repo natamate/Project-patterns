@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ACLForDatabase
 {
-    class MySqlRole : IDBRole
+    public class MySqlRole : IDBRole
     {
         public int RoleID { get; }
         public string RoleName { get; }

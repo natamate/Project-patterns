@@ -28,7 +28,7 @@ namespace ACLForDatabase
             UserId = 0;
             UserRole = new MySqlRole(0, "Administrators", null);
             UserName = "admin";
-            IsAdmin = true;
+            _admin = true;
         }
 
        
