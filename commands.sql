@@ -6,17 +6,17 @@ CREATE TABLE roles (
         rgt INT NOT NULL
 );
 
---query to create empty PRIVILEGES table
-CREATE TABLE privileges (
-        privilegeId INT AUTO_INCREMENT PRIMARY KEY,
+--query to create empty PERMISSIONS table
+CREATE TABLE permissions (
+        permissionId INT AUTO_INCREMENT PRIMARY KEY,
         roleId INT NOT NULL,
         rowId INT NOT NULL,
-        selectPrivilege TINYINT(1) NOT NULL,
-	editionPrivilege TINYINT(1) NOT NULL
+        selectPermission TINYINT(1) NOT NULL,
+	editionPermission TINYINT(1) NOT NULL
 );
 
 --query to create empty USERS table
-CREATE TABLE privileges (
+CREATE TABLE users (
         userId INT AUTO_INCREMENT PRIMARY KEY,
         roleId INT NOT NULL,
         name VARCHAR(20) NOT NULL
@@ -38,6 +38,10 @@ SELECT node.roleId FROM roles AS parent, roles AS node
 WHERE node.lft BETWEEN parent.lft AND parent.rgt
         AND parent.name = '@roleName';
 
+-- example query with authorisation
+select * from templateTable natural join permissions as p where p.roleId in (SELECT node.roleId FROM roles AS parent, roles AS node
+WHERE node.lft BETWEEN parent.lft AND parent.rgt
+AND parent.name = 'accountancy manager') and selectPermission=1;
 
 
 
