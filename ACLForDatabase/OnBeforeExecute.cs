@@ -12,7 +12,7 @@ namespace ACLForDatabase
     {
         // there is only example part of code
         private readonly string regexToIdentifySelect =
-            "(.*select +from.*?)(;)";
+            "(select *from)(;)";
         // TO CHANGE
         private readonly string regexToIdentifyEditionPerms =
             "(update)|(delete)";
