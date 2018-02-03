@@ -12,7 +12,7 @@ namespace ACLForDatabase
     {
         // there is only example part of code
         private readonly string regexToIdentifySelect =
-            "(select *from)(;)";
+            "(select.*from.*)(;)";
         // TO CHANGE
         private readonly string regexToIdentifyEditionPerms =
             "(update)|(delete)";
@@ -45,8 +45,9 @@ namespace ACLForDatabase
         // example only, not done
         private string ChangeIfSelect(string commandText, IDBRole role)
         {
-            var match = Regex.Match(commandText, regexToIdentifySelect,
+            var regex = new Regex(regexToIdentifySelect,
                 RegexOptions.IgnoreCase);
+            var match = regex.Match(commandText);
 
 
 
@@ -55,7 +56,7 @@ namespace ACLForDatabase
             {
                 var beginningPart = match.Groups[1].Value;
                 var endingPart = match.Groups[2].Value;
-                var joinPart = " natural join permisions as p ";
+                var joinPart = " natural join permissions as p ";
                 var wherePart = "where p.roleId in (SELECT node.roleId FROM roles AS parent, roles AS node " +
                     "WHERE node.lft BETWEEN parent.lft AND parent.rgt " +
                     "AND parent.name = '" + role.RoleName + "') and selectPermission = 1";

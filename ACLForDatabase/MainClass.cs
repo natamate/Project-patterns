@@ -7,7 +7,7 @@ using System.Data;
 namespace ACLForDatabase{
     public class MainClass{
         static void Main(string[] args){
-            /*
+            
             var container = new Container();
 
             // Go look in all assemblies and register all implementations
@@ -20,7 +20,7 @@ namespace ACLForDatabase{
                 typeof(AuthorizationCommandExecutorDecorator<>));
 
             container.Verify();
-            */
+            
             var server = "mysql.agh.edu.pl";
             var password = "nLrCdGx7nDhP5ymQ";
             var userName = "marcjaku";
@@ -40,16 +40,14 @@ namespace ACLForDatabase{
                     Console.WriteLine("Connection ok");
                     var command = new MySqlCommand("select * from templateTable;", user);
 
-                    // testing OnBeforeExecute
-                    var onBefore = new OnBeforeExecute<MySqlCommand>(command);
-                    Console.WriteLine(onBefore.Command.CommandText);
-                    System.Console.ReadLine();
+
 
                     //var commandExecutor = container.GetInstance<MySqlCommandExecutor>();
-                    /*var executor = new MySqlCommandExecutor();
-                    executor.Connection = conn1.Connection;
-                    var commandExecutor = new AuthorizationCommandExecutorDecorator<MySqlCommand>(executor);
-                    
+                    //var executor = new MySqlCommandExecutor();
+                    //executor.Connection = conn1.Connection;
+                    //var commandExecutor = new AuthorizationCommandExecutorDecorator<MySqlCommand>(executor);
+                    var commandExecutor = container.GetInstance<MySqlCommandExecutor>();
+                    commandExecutor.Connection = conn1.Connection;
 
 
                     var res = commandExecutor.Execute(command);
@@ -58,7 +56,7 @@ namespace ACLForDatabase{
                     {
                         Console.WriteLine(row.Field<string>(2));
                     }
-                    System.Console.ReadLine();*/
+                    System.Console.ReadLine();
                 }
             }
             
