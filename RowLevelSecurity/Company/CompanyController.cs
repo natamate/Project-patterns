@@ -29,6 +29,7 @@ namespace ACLDatabase.Company
             this.context = context;
         }
 
+        //if return 0 if ok, return 1 when exit
         public int DisplayFinancyFromEmployerView()
         {
             Authentication<T> MyAuth;

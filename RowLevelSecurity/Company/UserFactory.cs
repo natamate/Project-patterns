@@ -2,7 +2,7 @@
 {
     public class UserFactory
     {
-        public CompanyUser GetUser(string param)
+        public IUser GetUser(string param)
         {
             switch (param)
             {
