@@ -1,34 +1,33 @@
 ﻿using System.Data.Entity;
 using ACLDatabase.Model;
-using ACLDatabase.Company.DB;
 
-namespace ACLDatabase.Company
+namespace ACLDatabase.Company.DB
 {
     //Initialize data for both database and model.
     //The class inheritances DropCreateDatabaseAlways which is provided from Entity Framework
     //DropCreateDatabaseAlways: drop every table after each use, it means recreate all data and set seed for database
     public class InitializeData : DropCreateDatabaseAlways<CompanyContext>
     {
-        public Employee CreateEmp(string name, string role, CompanyContext MyContext, Role MyRole)
+        public Employee CreateEmp(string name, string role, CompanyContext myContext, Role myRole)
         {
-            var TmpEmployee = new Employee { Name = name, Role = MyRole.RoleId };
-            MyContext.Employees.Add(TmpEmployee);
+            var tmpEmployee = new Employee { Name = name, Role = myRole.RoleId };
+            myContext.Employees.Add(tmpEmployee);
 
-            var TmpRole = new RowRoles { RowId = TmpEmployee.RowId, RoleId = MyRole.RoleId };
-            MyContext.RowRoles.Add(TmpRole);
+            var tmpRole = new RowRoles { RowId = tmpEmployee.RowId, RoleId = myRole.RoleId };
+            myContext.RowRoles.Add(tmpRole);
 
-            return TmpEmployee;
+            return tmpEmployee;
         }
 
-        public Financial CreateFin(double val, Employee e, CompanyContext MyContext, Role MyRole)
+        public Financial CreateFin(double val, Employee e, CompanyContext myContext, Role myRole)
         {
-            var TmpEmployee = new Financial{Value = val,Employee = e,EmployeeRefId = e.EmployeeId};
-            MyContext.Financials.Add(TmpEmployee);
+            var tmpEmployee = new Financial{Value = val,Employee = e,EmployeeRefId = e.EmployeeId};
+            myContext.Financials.Add(tmpEmployee);
 
-            var TmpRole = new RowRoles { RowId = TmpEmployee.RowId, RoleId = MyRole.RoleId };
-            MyContext.RowRoles.Add(TmpRole);
+            var tmpRole = new RowRoles { RowId = tmpEmployee.RowId, RoleId = myRole.RoleId };
+            myContext.RowRoles.Add(tmpRole);
 
-            return TmpEmployee;
+            return tmpEmployee;
         }
 
         //Override for seed method which is required by DropCreateDatabaseAlways
@@ -66,7 +65,7 @@ namespace ACLDatabase.Company
             var em4 = CreateEmp("Kowalski", "Intern", context, role4);
 
             //test users employee
-            var t1 = CreateEmp("Test", "Tester", context, testRole);
+            var t1 = CreateEmp("Tester", "Tester", context, testRole);
 
             CreateFin(1000.0, em1, context, role1);
             CreateFin(1500.0, em1, context, role1);

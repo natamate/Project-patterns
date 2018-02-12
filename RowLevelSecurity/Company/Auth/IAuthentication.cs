@@ -1,5 +1,4 @@
-﻿using ACLDatabase.Company.DB;
-using ACLDatabase.Model;
+﻿using ACLDatabase.Model;
 
 namespace ACLDatabase.Company.Auth
 {

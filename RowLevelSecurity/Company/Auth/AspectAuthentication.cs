@@ -1,6 +1,5 @@
 ﻿using System;
 using ACLDatabase.Aspect;
-using ACLDatabase.Company.DB;
 using ACLDatabase.Model;
 
 namespace ACLDatabase.Company.Auth
@@ -11,7 +10,7 @@ namespace ACLDatabase.Company.Auth
         [Authorize]
         public void Authenticate(IUser userName, T context)
         {
-            Console.WriteLine("Login as " + userName);
+            Console.WriteLine("Login as " + userName.Username);
         }
     }
 }

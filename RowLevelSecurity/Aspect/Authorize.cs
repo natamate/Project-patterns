@@ -19,15 +19,9 @@ namespace ACLDatabase.Aspect
 
         public override void OnEntry(MethodExecutionArgs args)
         {
-            //var parameters = args.Method.GetParameters();
-            /*for (var i = 0; i < parameters.Length; i++)
-                if (parameters[i].Name.ToLower().Equals("username"))
-                {
-                    var user = (IUser) args.Arguments.GetArgument(i);
-                    userName = user.Username;
-                }*/
             var user = args.Arguments.OfType<IUser>().FirstOrDefault();
             var context = args.Arguments.OfType<ModelContext>().FirstOrDefault();
+
             if (user == null || context == null)
                 throw new ArgumentException("Argument usrename and context are required");
 

@@ -1,27 +1,25 @@
 ﻿using System;
-using System.Data.Entity;
 using ACLDatabase.Company.DB;
 using ACLDatabase.Company;
-using ACLDatabase.Model;
 
 namespace ACLDatabase.UI
 {
     //Main interface user of Program
     //This class references to the component UI of the pattern MVC
-    public class ConsoleUI : IView
+    public class ConsoleUi : IView
     {
-        private CompanyContext context;
-        private IDrawingStrategy strategy;
+        private CompanyContext _context;
+        private IDrawingStrategy _strategy;
 
-        public ConsoleUI(CompanyContext context, IDrawingStrategy strategy)
+        public ConsoleUi(CompanyContext context, IDrawingStrategy strategy)
         {
-            this.context = context;
-            this.strategy = strategy;
+            _context = context;
+            _strategy = strategy;
         }
 
         public void SetModel(CompanyContext context)
         {
-            this.context = context;
+            _context = context;
         }
         //Clear all components on interface
         public void ClearView()
@@ -31,7 +29,7 @@ namespace ACLDatabase.UI
 
         public void SetDrawingStrategy(IDrawingStrategy strategy)
         {
-            this.strategy = strategy;
+            _strategy = strategy;
         }
 
         //Title of application
@@ -50,16 +48,16 @@ namespace ACLDatabase.UI
                 Console.WriteLine("1. Normal");
                 Console.WriteLine("2. AOP");
                 var res = Console.ReadLine();
-                if (res == "1" || res == "2")
-                    return res;
-                else if (res == "0")
+                switch (res)
                 {
-                    return "exit";
-                }
-                else
-                {
-                    Console.WriteLine("The selection should be a integer from 1 to 2");
-                    continue;
+                    case "1":
+                    case "2":
+                        return res;
+                    case "0":
+                        return "exit";
+                    default:
+                        Console.WriteLine("The selection should be a integer from 1 to 2");
+                        continue;
                 }
             }
             
@@ -94,7 +92,7 @@ namespace ACLDatabase.UI
         {
             Console.WriteLine();
             Console.WriteLine("There are");
-            strategy.DrawSpecificTable(context);
+            _strategy.DrawSpecificTable(_context);
             Console.ReadLine();
         }
     }

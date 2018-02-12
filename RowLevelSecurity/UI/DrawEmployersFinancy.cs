@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ACLDatabase.Company.DB;
 
 namespace ACLDatabase.UI
@@ -11,23 +7,23 @@ namespace ACLDatabase.UI
     {
         public void DrawSpecificTable(CompanyContext context)
         {
-            foreach (var TmpEmployee in context.Employees)
+            foreach (var tmpEmployee in context.Employees)
             {
                 //printing employees table
                 Console.WriteLine("{0,-4} {1,-10} {2,-15}",
                     "Id", "Name", "Role");
                 Console.WriteLine("------------------------------------------------");
                 Console.WriteLine("{0,-4} {1,-10} {2,-15}",
-                    TmpEmployee.EmployeeId, TmpEmployee.Name, TmpEmployee.Role);
+                    tmpEmployee.EmployeeId, tmpEmployee.Name, tmpEmployee.Role);
                 Console.WriteLine("------------------------------------------------");
 
                 //printing financials table
                 Console.WriteLine("{0,-10} {1,-10} {2,-4}",
                     "EmployeeId", "Value", "FinancialId");
                 Console.WriteLine("------------------------------------------------");
-                foreach (var TmpFinancial in TmpEmployee.FinancialList)
+                foreach (var tmpFinancial in tmpEmployee.FinancialList)
                     Console.WriteLine("{0,-10} {1,-10} {2, -4}",
-                        TmpFinancial.EmployeeRefId, TmpFinancial.Value, TmpFinancial.FinancialId);
+                        tmpFinancial.EmployeeRefId, tmpFinancial.Value, tmpFinancial.FinancialId);
                 Console.WriteLine();
             }
         }

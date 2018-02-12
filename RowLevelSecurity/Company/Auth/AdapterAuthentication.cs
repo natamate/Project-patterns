@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ACLDatabase.Model;
+﻿using ACLDatabase.Model;
 
 namespace ACLDatabase.Company.Auth
 {

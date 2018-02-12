@@ -1,6 +1,4 @@
-﻿using System.Data.Entity;
-using ACLDatabase.Company.Auth;
-using ACLDatabase.Company.DB;
+﻿using ACLDatabase.Company.Auth;
 using ACLDatabase.Model;
 using ACLDatabase.UI;
 
@@ -10,50 +8,50 @@ namespace ACLDatabase.Company
     //This class references to component Controller in pattern MVC
     public class CompanyController<T> where T : ModelContext
     {
-        private IView view;
-        private T context;
+        private IView _view;
+        private T _context;
 
         public CompanyController(IView view, T context)
         {
-            this.view = view;
-            this.context = context;
+            _view = view;
+            _context = context;
         }
 
         public void SetView(IView view)
         {
-            this.view = view;
+            _view = view;
         }
 
         public void SetModel(T context)
         {
-            this.context = context;
+            _context = context;
         }
 
         //if return 0 if ok, return 1 when exit
         public int DisplayFinancyFromEmployerView()
         {
-            IAuthentication<T> MyAuth;
-            AuthFactory<T> MyAuthFactory = new AuthFactory<T>();
-            view.ClearView();
-            view.DrawGreetings();
+            IAuthentication<T> myAuth;
+            var myAuthFactory = new AuthFactory<T>();
+            _view.ClearView();
+            _view.DrawGreetings();
             //From UI make a choice for type connection
-            string type = view.GetTypeOfConnection();
+            var type = _view.GetTypeOfConnection();
             if (type == "exit")
                 return 1;
 
             //Get type of IAuthentication by Factory
             //1. Normal
             //2. Aspect
-            MyAuth = MyAuthFactory.GetAuthentication(type);
+            myAuth = myAuthFactory.GetAuthentication(type);
 
             //From UI make a choice for user
-            var user = view.GetUser();
+            var user = _view.GetUser();
 
             //Authenticate user
-            MyAuth.Authenticate(user,context);
+            myAuth.Authenticate(user,_context);
 
             //Display data on the screen
-            view.DrawTable();
+            _view.DrawTable();
 
             return 0;
         }

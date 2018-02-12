@@ -9,7 +9,7 @@ namespace ACLDatabase.Model
     {
         public Role()
         {
-            this.Users = new HashSet<User>();
+            Users = new HashSet<User>();
         }
 
         [Key]

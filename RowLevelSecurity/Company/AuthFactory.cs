@@ -8,12 +8,15 @@ namespace ACLDatabase.Company
     {
         public IAuthentication<T> GetAuthentication(string type)
         {
-            if (type == null)
-                return null;
-            else if (type == "1")
-                return new NormalAuthentication<T>();
-            else
-                return new AspectAuthentication<T>();
+            switch (type)
+            {
+                case null:
+                    return null;
+                case "1":
+                    return new NormalAuthentication<T>();
+                default:
+                    return new AspectAuthentication<T>();
+            }
         }
     }
 }

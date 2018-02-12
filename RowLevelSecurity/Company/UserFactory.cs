@@ -16,8 +16,10 @@
                     return new CompanyUser("Intern_login");
                 case "5":
                     return new CompanyUser("Test_login");
+                default:
+                    return null;
             }
-            return null;
+            
         }
     }
 }

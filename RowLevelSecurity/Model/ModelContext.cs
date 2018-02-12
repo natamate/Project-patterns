@@ -14,7 +14,7 @@ namespace ACLDatabase.Model
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<RowRoles> RowRoles { get; set; }
-        private string UserNameInProcess;
+        private string _userNameInProcess;
 
         protected ModelContext()
         {
@@ -30,14 +30,14 @@ namespace ACLDatabase.Model
         {
             modelBuilder.Filter("SecuredByRole",
                 (Row securedEntity, IEnumerable<Guid> userRows) => userRows.Contains(securedEntity.RowId),
-                (ModelContext context) => context.GetUserRowIds(UserNameInProcess));
+                (ModelContext context) => context.GetUserRowIds(_userNameInProcess));
 
             base.OnModelCreating(modelBuilder);
         }
 
         public void Authorize(string username)
         {
-            UserNameInProcess = username;
+            _userNameInProcess = username;
         }
 
         private IEnumerable<Guid> GetUserRowIds(string username) {
@@ -61,9 +61,7 @@ namespace ACLDatabase.Model
                     .Where(r => roleParentIds.Contains(r.ParentId))
                     .Select(r => r.RoleId)
                     .AsEnumerable();
-            if (childRoleIds.Any())
-                return childRoleIds.Concat(GetChildRoleIds(childRoleIds));
-            return childRoleIds;
+            return childRoleIds.Any() ? childRoleIds.Concat(GetChildRoleIds(childRoleIds)) : childRoleIds;
         }
     }
 }

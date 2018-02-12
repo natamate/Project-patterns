@@ -1,6 +1,4 @@
-﻿using System;
-using ACLDatabase.Company.DB;
-using ACLDatabase.Model;
+﻿using ACLDatabase.Model;
 
 namespace ACLDatabase.Company.Auth
 {
@@ -9,8 +7,8 @@ namespace ACLDatabase.Company.Auth
     {
         public void Authenticate(IUser userName, T context)
         {
-            IAuthentication<T> MyAdapter = new AdapterAuthentication<T>();
-            MyAdapter.Authenticate(userName, context);
+            IAuthentication<T> myAdapter = new AdapterAuthentication<T>();
+            myAdapter.Authenticate(userName, context);
         }
     }
 }

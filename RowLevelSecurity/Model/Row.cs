@@ -8,7 +8,7 @@ namespace ACLDatabase.Model
     {
         protected Row()
         {
-            this.RowId = Guid.NewGuid();
+            RowId = Guid.NewGuid();
         }
 
         [Required]
