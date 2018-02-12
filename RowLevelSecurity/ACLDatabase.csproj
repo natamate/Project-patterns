@@ -64,6 +64,7 @@
     <Compile Include="Company\Auth\AspectAuthentication.cs" />
     <Compile Include="Company\Auth\Authentication.cs" />
     <Compile Include="Company\Auth\NormalAuthentication.cs" />
+    <Compile Include="Company\MainClass.cs" />
     <Compile Include="Company\CompanyUser.cs" />
     <Compile Include="Company\CompanyController.cs" />
     <Compile Include="Company\DB\CompanyContext.cs" />

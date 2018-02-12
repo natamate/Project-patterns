@@ -57,24 +57,5 @@ namespace ACLDatabase.Company
             return 0;
         }
 
-        public static void Main(string[] args)
-        {
-            //Main program
-            using (var MyDB = new CompanyContext())
-            {
-                //Declaration for UI, Database, Model and Authentication
-                var drawingStrategy = new DrawEmployersFinancy();
-                var MyUI = new ConsoleUI(MyDB,drawingStrategy);
-                Database.SetInitializer(new InitializeData());
-                var controller = new CompanyController<CompanyContext>(MyUI, MyDB);
-
-                while (true)
-                {
-                    if(controller.DisplayFinancyFromEmployerView() == 1)
-                        break;
-                }
-            }
-        }
-
     }
 }
