@@ -35,8 +35,6 @@ namespace ACLDatabase.Model
             base.OnModelCreating(modelBuilder);
         }
 
-
-
         public void Authorize(string username)
         {
             UserNameInProcess = username;
