@@ -2,20 +2,20 @@
 {
     public class UserFactory
     {
-        public string GetUser(string param)
+        public CompanyUser GetUser(string param)
         {
             switch (param)
             {
                 case "1":
-                    return "Boss_login";
+                    return new CompanyUser("Boss_login");
                 case "2":
-                    return "Accountant_login";
+                    return new CompanyUser("Accountant_login");
                 case "3":
-                    return "Programist_login";
+                    return new CompanyUser("Programist_login");
                 case "4":
-                    return "Intern_login";
+                    return new CompanyUser("Intern_login");
                 case "5":
-                    return "Test_login";
+                    return new CompanyUser("Test_login");
             }
             return null;
         }

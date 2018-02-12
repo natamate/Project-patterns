@@ -1,21 +1,41 @@
 ﻿using System;
+using System.Data.Entity;
 using ACLDatabase.Company.DB;
 using ACLDatabase.Company;
+using ACLDatabase.Model;
 
 namespace ACLDatabase.UI
 {
     //Main interface user of Program
     //This class references to the component UI of the pattern MVC
-    public class ConsoleUI
+    public class ConsoleUI : IView
     {
+        private CompanyContext context;
+        private IDrawingStrategy strategy;
+
+        public ConsoleUI(CompanyContext context, IDrawingStrategy strategy)
+        {
+            this.context = context;
+            this.strategy = strategy;
+        }
+
+        public void SetModel(CompanyContext context)
+        {
+            this.context = context;
+        }
         //Clear all components on interface
-        public void ClearUI()
+        public void ClearView()
         {
             Console.Clear();
         }
 
+        public void SetDrawingStrategy(IDrawingStrategy strategy)
+        {
+            this.strategy = strategy;
+        }
+
         //Title of application
-        public void GetGreetings()
+        public void DrawGreetings()
         {
             Console.WriteLine("Wellcome to our application.");
         }
@@ -46,7 +66,7 @@ namespace ACLDatabase.UI
         }
 
         //Get user method
-        public string GetUser(CompanyContext c)
+        public IUser GetUser()
         {
             UserFactory uf = new UserFactory();
             while (true)
@@ -70,27 +90,11 @@ namespace ACLDatabase.UI
         }
 
         //print result on UI stream
-        public void PrintData(CompanyContext context)
+        public void DrawTable()
         {
-            foreach (var TmpEmployee in context.Employees)
-            {
-                //printing employees table
-                Console.WriteLine("{0,-4} {1,-10} {2,-15}",
-                                    "Id", "Name", "Role");
-                Console.WriteLine("------------------------------------------------");
-                Console.WriteLine("{0,-4} {1,-10} {2,-15}",
-                    TmpEmployee.EmployeeId, TmpEmployee.Name, TmpEmployee.Role);
-                Console.WriteLine("------------------------------------------------");
-
-                //printing financials table
-                Console.WriteLine("{0,-10} {1,-10} {2,-4}",
-                                  "EmployeeId", "Value", "FinancialId");
-                Console.WriteLine("------------------------------------------------");
-                foreach (var TmpFinancial in TmpEmployee.FinancialList)
-                    Console.WriteLine("{0,-10} {1,-10} {2, -4}",
-                                    TmpFinancial.EmployeeRefId, TmpFinancial.Value, TmpFinancial.FinancialId);
-                Console.WriteLine();
-            }
+            strategy.DrawSpecificTable(context);
+            Console.WriteLine();
+            Console.WriteLine("There are");
             Console.ReadLine();
         }
     }
