@@ -63,7 +63,7 @@
     <Compile Include="Company\AuthFactory.cs" />
     <Compile Include="Company\Auth\AdapterAuthentication.cs" />
     <Compile Include="Company\Auth\AspectAuthentication.cs" />
-    <Compile Include="Company\Auth\Authentication.cs" />
+    <Compile Include="Company\Auth\IAuthentication.cs" />
     <Compile Include="Company\Auth\NormalAuthentication.cs" />
     <Compile Include="Company\Auth\OldAuthentication.cs" />
     <Compile Include="Company\MainClass.cs" />

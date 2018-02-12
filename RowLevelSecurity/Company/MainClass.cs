@@ -16,7 +16,7 @@ namespace ACLDatabase.Company
             //Main program
             using (var MyDB = new CompanyContext())
             {
-                //Declaration for UI, Database, Model and Authentication
+                //Declaration for UI, Database, Model and IAuthentication
                 var drawingStrategy = new DrawEmployersFinancy();
                 var MyUI = new ConsoleUI(MyDB, drawingStrategy);
                 Database.SetInitializer(new InitializeData());

@@ -60,10 +60,10 @@ namespace ACLDatabase.Company
 
             var em1 = CreateEmp("Trinh", "CEO", context, role1);
             var em2 = CreateEmp("Materek", "Accountant", context, role2);
-            var em31 = CreateEmp("Marcin", "Programist", context, role3);
+            var em31 = CreateEmp("Jakubowski", "Programist", context, role3);
             var em32 = CreateEmp("Lisiecki", "Programist", context, role3);
-            var em33 = CreateEmp("Szymon", "Programist", context, role3);
-            var em4 = CreateEmp("Kto", "Intern", context, role4);
+            var em33 = CreateEmp("Mrowkojad", "Programist", context, role3);
+            var em4 = CreateEmp("Kowalski", "Intern", context, role4);
 
             //test users employee
             var t1 = CreateEmp("Test", "Tester", context, testRole);

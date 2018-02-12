@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using ACLDatabase.Company;
 using PostSharp.Aspects;
 using ACLDatabase.Model;
 
@@ -18,17 +19,19 @@ namespace ACLDatabase.Aspect
 
         public override void OnEntry(MethodExecutionArgs args)
         {
-            string userName = null;
-            var parameters = args.Method.GetParameters();
-            for (var i = 0; i < parameters.Length; i++)
+            //var parameters = args.Method.GetParameters();
+            /*for (var i = 0; i < parameters.Length; i++)
                 if (parameters[i].Name.ToLower().Equals("username"))
-                    userName = (string) args.Arguments.GetArgument(i);
-
+                {
+                    var user = (IUser) args.Arguments.GetArgument(i);
+                    userName = user.Username;
+                }*/
+            var user = args.Arguments.OfType<IUser>().FirstOrDefault();
             var context = args.Arguments.OfType<ModelContext>().FirstOrDefault();
-            if (userName == null || context == null)
+            if (user == null || context == null)
                 throw new ArgumentException("Argument usrename and context are required");
 
-            context.Authorize(userName);
+            context.Authorize(user.Username);
         }
     }
 }

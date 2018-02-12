@@ -32,7 +32,7 @@ namespace ACLDatabase.Company
         //if return 0 if ok, return 1 when exit
         public int DisplayFinancyFromEmployerView()
         {
-            Authentication<T> MyAuth;
+            IAuthentication<T> MyAuth;
             AuthFactory<T> MyAuthFactory = new AuthFactory<T>();
             view.ClearView();
             view.DrawGreetings();
@@ -41,7 +41,7 @@ namespace ACLDatabase.Company
             if (type == "exit")
                 return 1;
 
-            //Get type of Authentication by Factory
+            //Get type of IAuthentication by Factory
             //1. Normal
             //2. Aspect
             MyAuth = MyAuthFactory.GetAuthentication(type);
@@ -50,7 +50,7 @@ namespace ACLDatabase.Company
             var user = view.GetUser();
 
             //Authenticate user
-            MyAuth.Authenticate(user.Username,context);
+            MyAuth.Authenticate(user,context);
 
             //Display data on the screen
             view.DrawTable();

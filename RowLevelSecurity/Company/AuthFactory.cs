@@ -3,10 +3,10 @@ using ACLDatabase.Model;
 
 namespace ACLDatabase.Company
 {
-    //Simple factory for Authentication methods
+    //Simple factory for IAuthentication methods
     public class AuthFactory<T> where T : ModelContext
     {
-        public Authentication<T> GetAuthentication(string type)
+        public IAuthentication<T> GetAuthentication(string type)
         {
             if (type == null)
                 return null;
