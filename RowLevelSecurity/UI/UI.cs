@@ -92,9 +92,9 @@ namespace ACLDatabase.UI
         //print result on UI stream
         public void DrawTable()
         {
-            strategy.DrawSpecificTable(context);
             Console.WriteLine();
             Console.WriteLine("There are");
+            strategy.DrawSpecificTable(context);
             Console.ReadLine();
         }
     }
