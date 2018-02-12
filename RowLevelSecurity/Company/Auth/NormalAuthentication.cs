@@ -9,8 +9,8 @@ namespace ACLDatabase.Company.Auth
     {
         public void Authenticate(string userName, T context)
         {
-            context.Authorize(userName);
-            Console.WriteLine("Login as " + userName);
+            Authentication<T> MyAdapter = new AdapterAuthentication<T>();
+            MyAdapter.Authenticate(userName, context);
         }
     }
 }
