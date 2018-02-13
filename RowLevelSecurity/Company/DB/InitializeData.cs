@@ -93,6 +93,7 @@ namespace ACLDatabase.Company.DB
 
             CreateFin(10.0, t1, context, testRole);
             CreateFin(70.0, t1, context, testRole);
+            CreateFin(100.0, t1, context, testRole);
 
             context.Users.Add(user1);
             context.Users.Add(user2);
