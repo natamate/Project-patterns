@@ -1,6 +1,5 @@
 ﻿using System;
 using ACLDatabase.Company.DB;
-using ACLDatabase.Model;
 
 namespace ACLDatabase.UI
 {

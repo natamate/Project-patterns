@@ -1,35 +1,28 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ACLDatabase.Model
 {
     //Database of SecureEntity
     public class RowRoleDependency
     {
-        protected RowRoleDependency()
-        {
-            RowRoleDependencyId = Guid.NewGuid();
-        }
+        protected RowRoleDependency() { }
 
         public RowRoleDependency(Row row, Role role)
         {
-            RowRoleDependencyId = Guid.NewGuid();
             Role = role;
             RowId = row.RowId;
         }
         public RowRoleDependency(int rowId, Role role)
         {
-            RowRoleDependencyId = Guid.NewGuid();
             Role = role;
             RowId = rowId;
         }
 
-        [Required]
-        public Guid RowRoleDependencyId { get; set; }
-
+        [Key]
+        public int RowRoleDependencyId { get; set; }
         [Required]
         public int RowId { get; set; }
-
         [Required]
         public Role Role { get; set; }
     }
