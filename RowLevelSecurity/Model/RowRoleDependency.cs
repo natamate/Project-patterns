@@ -10,12 +10,12 @@ namespace ACLDatabase.Model
 
         public RowRoleDependency(Row row, Role role)
         {
-            Role = role;
+            RoleId = role.RoleId;
             RowId = row.RowId;
         }
         public RowRoleDependency(int rowId, Role role)
         {
-            Role = role;
+            RoleId = role.RoleId;
             RowId = rowId;
         }
 
@@ -24,6 +24,6 @@ namespace ACLDatabase.Model
         [Required]
         public int RowId { get; set; }
         [Required]
-        public Role Role { get; set; }
+        public string RoleId { get; set; }
     }
 }

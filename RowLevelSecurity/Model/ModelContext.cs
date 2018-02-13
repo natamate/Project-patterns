@@ -27,26 +27,35 @@ namespace ACLDatabase.Model
         {
             modelBuilder.Filter("SecuredByRole",
                 (Row securedEntity, IEnumerable<int> userRows) => userRows.Contains(securedEntity.RowId),
-                (ModelContext context) => context.GetUserRowsIds(_userNameInProcess));
+                (ModelContext context) => context.GetUserRowIds(_userNameInProcess));
+                
 
             base.OnModelCreating(modelBuilder);
         }
 
-        private IEnumerable<int> GetUserRowsIds(string username)
+        private IEnumerable<int> GetUserRowIds(string username)
         {
-            var role = GetUserRole(username);
+            var roles = GetUserRoles(username);
             return RowRoleDependencies
-                .Where(r => r.Role.RoleId == role)
+                .Where(r => roles.Contains(r.RoleId))
                 .Select(r => r.RowId);
         }
 
-        private string GetUserRole(string userName)
+        private IEnumerable<string> GetUserRoles(string userName)
         {
-            foreach (var myRole in Roles)
-            {
-                if (myRole.RoleId == userName) return myRole.RoleId;
-            }
-            return string.Empty;
+            var role = Roles.First(u => u.RoleId == userName).RoleId;
+            var roles = new List<string>() { role };
+            return roles.Concat(GetChildRoleIds(roles)).Distinct();
+        }
+
+        private IEnumerable<string> GetChildRoleIds(IEnumerable<string> roleParentIds)
+        {
+            var childRoleIds =
+                Roles
+                    .Where(r => roleParentIds.Contains(r.ParentId))
+                    .Select(r => r.RoleId)
+                    .AsEnumerable();
+            return childRoleIds.Any() ? childRoleIds.Concat(GetChildRoleIds(childRoleIds)) : childRoleIds;
         }
 
         //private List<string> GetRowRoles(Row row)
