@@ -12,7 +12,7 @@ namespace ACLDatabase.Company
             using (var myDb = new CompanyContext())
             {
                 //Declaration for UI, Database, Model and IAuthentication
-                var drawingStrategy = new DrawEmployersFinancy();
+                var drawingStrategy = new DrawEmployeesFinancy();
                 var myUi = new ConsoleUi(myDb, drawingStrategy);
                 Database.SetInitializer(new InitializeData());
                 var controller = new CompanyController<CompanyContext>(myUi, myDb);
