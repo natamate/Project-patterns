@@ -18,7 +18,7 @@ namespace ACLDatabase.Company.DB
         public int EmployeeId { get; set; }
 
         public string Name { get; set; }
-        public string Role { get; set; }
+        public Role Role { get; set; }
 
         public virtual List<Financial> FinancialList { get; set; }
     }

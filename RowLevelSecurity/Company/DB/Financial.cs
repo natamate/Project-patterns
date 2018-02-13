@@ -13,7 +13,6 @@ namespace ACLDatabase.Company.DB
         public int FinancialId { get; set; }
 
         public double Value { get; set; }
-        public int EmployeeRefId { get; set; }
 
         [ForeignKey("EmployeeRefId")]
         public virtual Employee Employee { get; set; }

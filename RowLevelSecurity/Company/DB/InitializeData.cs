@@ -1,90 +1,78 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using ACLDatabase.Model;
 
 namespace ACLDatabase.Company.DB
 {
-    //Initialize data for both database and model.
-    //The class inheritances DropCreateDatabaseAlways which is provided from Entity Framework
-    //DropCreateDatabaseAlways: drop every table after each use, it means recreate all data and set seed for database
     public class InitializeData : DropCreateDatabaseAlways<CompanyContext>
     {
-        public Employee CreateEmp(string name, string role, CompanyContext myContext, Role myRole)
+        public Employee CreateEmp(string name, CompanyContext myContext)
         {
-            var tmpEmployee = new Employee { Name = name, Role = myRole.RoleId };
+            var newRole = new Role { RoleId = name};
+            var tmpEmployee = new Employee { Name = name, Role = newRole};
             myContext.Employees.Add(tmpEmployee);
+            myContext.Roles.Add(newRole);
 
             return tmpEmployee;
         }
 
-        public Financial CreateFin(double val, Employee e, CompanyContext myContext, Role myRole)
+        public void CreateParentChildRelation(Employee parent, Employee child)
         {
-            var tmpEmployee = new Financial{Value = val,Employee = e,EmployeeRefId = e.EmployeeId};
-            myContext.Financials.Add(tmpEmployee);
+            child.Role.ParentId = parent.Role.RoleId;
+        }
 
-            return tmpEmployee;
+        public Financial CreateFin(double val, Employee e, CompanyContext myContext)
+        {
+            var createFin = new Financial{Value = val,Employee = e};
+            myContext.Financials.Add(createFin);
+
+
+            return createFin;
+        }
+
+        public RowRoleDependency AddRowPermition(Employee employee, Financial financial, CompanyContext myContext)
+        {
+            var dependency = new RowRoleDependency(financial.RowId, employee.Role);
+            myContext.RowRoleDependencies.Add(dependency);
+            return dependency;
         }
 
         //Override for seed method which is required by DropCreateDatabaseAlways
         protected override void Seed(CompanyContext context)
         {
+            /*
+            var em1 = CreateEmp("Trinh", context);
+            var em2 = CreateEmp("Materek", context);
+            var em31 = CreateEmp("Jakubowski",context);
+            var em32 = CreateEmp("Lisiecki", context);
+            var em33 = CreateEmp("Mrowkojad", context);
+            var em4 = CreateEmp("Kowalski", context);
+            */
+            /*
+            CreateFin(1000.0, em1, context);
+            CreateFin(1500.0, em1, context);
+            CreateFin(1600.0, em1, context);
 
-            //test users
-            //var testUser = new User { Login = "Test_login" };
+            CreateFin(600.0, em2, context);
+            CreateFin(700.0, em2, context);
+            CreateFin(800.0, em2, context);
 
-            var role1 = new Role {RoleId = "CEO"};
-            var role2 = new Role {RoleId = "Accountant", ParentId = role1.RoleId};
-            var role3 = new Role {RoleId = "Programist", ParentId = role2.RoleId};
-            var role4 = new Role {RoleId = "Intern", ParentId = role2.RoleId};
+            CreateFin(650.0, em31, context);
+            CreateFin(750.0, em31, context);
+            CreateFin(8500.0, em31, context);
 
-            //test roles
-            var testRole = new Role() { RoleId = "Test" };
+            CreateFin(6510.0, em32, context);
+            CreateFin(7510.0, em32, context);
+            CreateFin(8510.0, em32, context);
 
+            CreateFin(6530.0, em33, context);
+            CreateFin(7530.0, em33, context);
+            CreateFin(8530.0, em33, context);
 
-            //test users - adding role to user
-            //testUser.Roles.Add(testRole);
+            CreateFin(100.0, em4, context);
+            CreateFin(200.0, em4, context);
+            CreateFin(3000.0, em4, context);
+            */
 
-            var em1 = CreateEmp("Trinh", "CEO", context, role1);
-            var em2 = CreateEmp("Materek", "Accountant", context, role2);
-            var em31 = CreateEmp("Jakubowski", "Programist", context, role3);
-            var em32 = CreateEmp("Lisiecki", "Programist", context, role3);
-            var em33 = CreateEmp("Mrowkojad", "Programist", context, role3);
-            var em4 = CreateEmp("Kowalski", "Intern", context, role4);
-
-            //test users employee
-            var t1 = CreateEmp("Tester", "Tester", context, testRole);
-
-            CreateFin(1000.0, em1, context, role1);
-            CreateFin(1500.0, em1, context, role1);
-            CreateFin(1600.0, em1, context, role1);
-
-            CreateFin(600.0, em2, context, role2);
-            CreateFin(700.0, em2, context, role2);
-            CreateFin(800.0, em2, context, role2);
-
-            CreateFin(650.0, em31, context, role3);
-            CreateFin(750.0, em31, context, role3);
-            CreateFin(8500.0, em31, context, role3);
-
-            CreateFin(6510.0, em32, context, role3);
-            CreateFin(7510.0, em32, context, role3);
-            CreateFin(8510.0, em32, context, role3);
-
-            CreateFin(6530.0, em33, context, role3);
-            CreateFin(7530.0, em33, context, role3);
-            CreateFin(8530.0, em33, context, role3);
-
-            CreateFin(100.0, em4, context, role4);
-            CreateFin(200.0, em4, context, role4);
-            CreateFin(3000.0, em4, context, role4);
-
-            CreateFin(10.0, t1, context, testRole);
-            CreateFin(70.0, t1, context, testRole);
-            CreateFin(100.0, t1, context, testRole);
-
-            //context.Users.Add(user4);
-
-            //context.Users.Add(testUser);
 
             context.SaveChanges();
         }

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using EntityFramework.DynamicFilters;
 
 namespace ACLDatabase.Model
 {
-    //Context of model
-    //Using entity framework to deal with database. It inheritances from DbContext
     public abstract class ModelContext : DbContext
     {
         public DbSet<Role> Roles { get; set; }
@@ -28,37 +25,28 @@ namespace ACLDatabase.Model
 
         protected sealed override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //TODO dodaj nowe dziłąnie filtru
-            throw new NotImplementedException();
-            modelBuilder.Filter("SecuredByRole",
-                (Row securedEntity, IEnumerable<Guid> userRows) => userRows.Contains(securedEntity.RowId),
-                (ModelContext context) => context.GetUserRowIds(_userNameInProcess));
+            //var pom = new List<string> {_userNameInProcess};
+            modelBuilder.Filter("SecuredByRole", 
+                (Row securedRow) => GetRowRoles(securedRow));
+            //TODO sprawdz nowe działnie filtru
+            //jakby nie działalo to zostawiam starą wersję
+            //modelBuilder.Filter("SecuredByRole",
+            //    (Row securedEntity, IEnumerable<Guid> userRows) => userRows.Contains(securedEntity.RowId),
+            //    (ModelContext context) => context.GetUserRowIds(_userNameInProcess));
 
             base.OnModelCreating(modelBuilder);
         }
 
+        private List<string> GetRowRoles(Row row)
+        {
+            return (from dependency in RowRoleDependencies where dependency.RowId == row.RowId select dependency.Role.RoleId).ToList();
+        }
+            
         public void Authorize(string username)
         {
             _userNameInProcess = username;
         }
 
-        private IEnumerable<Guid> GetUserRowIds(string username) {
-            var roles = GetUserRoles(username);
-            //TODO zmien implementacje z Usera dla roli wzraz z wszystkimi uzyciami
-            throw new NotImplementedException();
-            //return RowRoles
-            //    .Where(r => roles.Contains(r.RoleId))
-            //    .Select(r => r.RowId);
-        }
-
-        private IEnumerable<string> GetUserRoles(string userName)
-        {
-            //TODO zamień User na Role 
-            throw new NotImplementedException();
-            //var user = Users.First(u => u.Login == userName);
-            //var roles = user.Roles.Select(r => r.RoleId);
-            //return roles.Concat(GetChildRoleIds(roles)).Distinct();
-        }
 
         private IEnumerable<string> GetChildRoleIds(IEnumerable<string> roleParentIds)
         {
@@ -71,7 +59,6 @@ namespace ACLDatabase.Model
         }
 
         /**************************************************************************************************/
-        //Uzytkownika indentyfikuejmy z rolą 
         public void AddRole(Role addedRole)
         {
             Roles.Add(addedRole);
@@ -94,15 +81,13 @@ namespace ACLDatabase.Model
 
         public void AddRowRoleDependency(Row addedRow, Role addedRole)
         {
-            RowRoleDependencies.Add(new RowRoleDependency(addedRow,role: addedRole));
+            RowRoleDependencies.Add(new RowRoleDependency(addedRow,addedRole));
         }
 
         public void RemoveRowRoleDependency(Row removedRow,Role removedRole)
         {
-            var toBeRemoved = RowRoleDependencies.Where(n => n.RoleId == removedRole && n.RowId == removedRow.RowId);
+            var toBeRemoved = RowRoleDependencies.Where(n => n.Role == removedRole && n.RowId == removedRow.RowId);
             RowRoleDependencies.RemoveRange(toBeRemoved);
         }
-
-
     }
 }
