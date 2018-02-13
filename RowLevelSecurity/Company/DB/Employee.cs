@@ -4,10 +4,7 @@ using ACLDatabase.Model;
 
 namespace ACLDatabase.Company.DB
 {
-    //Database Employee
-    //Each employee has EmployeeId, Name, Role and financialList
-    //EmployeeId is key of database
-    public class Employee : Row
+    public class Employee
     {
         public Employee()
         {
@@ -16,8 +13,9 @@ namespace ACLDatabase.Company.DB
 
         [Key]
         public int EmployeeId { get; set; }
-
+        [Required]
         public string Name { get; set; }
+        [Required]
         public Role Role { get; set; }
 
         public virtual List<Financial> FinancialList { get; set; }

@@ -36,7 +36,6 @@ namespace ACLDatabase.Company.DB
             return dependency;
         }
 
-        //Override for seed method which is required by DropCreateDatabaseAlways
         protected override void Seed(CompanyContext context)
         {
             var em1 = CreateEmp("Trinh", context);
@@ -50,17 +49,20 @@ namespace ACLDatabase.Company.DB
             CreateParentChildRelation(em2, em32);
             CreateParentChildRelation(em31, em4);
 
-            var fin1 = CreateFin(1000.0, em1, context);
-            var fin2 = CreateFin(600.0, em2, context);
-            var fin31 = CreateFin(650.0, em31, context);
-            var fin32 = CreateFin(6510.0, em32, context);
-            var fin4 = CreateFin(100.0, em4, context);
+            var fin1 = CreateFin(1.0, em1, context);
+            var fin2 = CreateFin(2.0, em2, context);
+            var fin31 = CreateFin(31.0, em31, context);
+            var fin32 = CreateFin(32.0, em32, context);
+            var fin4 = CreateFin(4.0, em4, context);
 
             AddRowPermition(em1, fin1, context);
-            AddRowPermition(em2, fin2, context);
-            AddRowPermition(em31, fin31, context);
-            AddRowPermition(em32, fin32, context);
 
+            AddRowPermition(em2, fin1, context);
+            AddRowPermition(em2, fin2, context);
+
+            AddRowPermition(em31, fin31, context);
+
+            AddRowPermition(em32, fin32, context);
 
             AddRowPermition(em4, fin4, context);
 

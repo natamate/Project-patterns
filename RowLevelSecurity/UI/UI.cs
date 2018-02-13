@@ -70,11 +70,11 @@ namespace ACLDatabase.UI
             while (true)
             {
                 Console.WriteLine("Login as: ");
-                Console.WriteLine("1. Boss");
-                Console.WriteLine("2. Accountant");
-                Console.WriteLine("3. Programmer");
-                Console.WriteLine("4. Intern");
-                Console.WriteLine("5. Test User");
+                Console.WriteLine("1. Trinh");
+                Console.WriteLine("2. Materek");
+                Console.WriteLine("3. Jakubowski");
+                Console.WriteLine("4. Lisiecki");
+                Console.WriteLine("5. Kowalski");
                 var res = Console.ReadLine();
                 var user = uf.GetUser(res);
                 if (user == null)

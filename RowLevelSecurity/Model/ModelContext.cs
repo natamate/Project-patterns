@@ -26,18 +26,14 @@ namespace ACLDatabase.Model
 
         protected sealed override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //var pom = new List<string> {_userNameInProcess};
-            //modelBuilder.Filter("SecuredByRole", 
-            //    (Row securedRow) => GetRowRoles(securedRow));
-
             modelBuilder.Filter("SecuredByRole",
-                (Row securedEntity, IEnumerable<Guid> userRows) => userRows.Contains(securedEntity.RowId),
+                (Row securedEntity, IEnumerable<int> userRows) => userRows.Contains(securedEntity.RowId),
                 (ModelContext context) => context.GetUserRowsIds(_userNameInProcess));
 
             base.OnModelCreating(modelBuilder);
         }
 
-        private IEnumerable<Guid> GetUserRowsIds(string username)
+        private IEnumerable<int> GetUserRowsIds(string username)
         {
             var role = GetUserRole(username);
             return RowRoleDependencies
