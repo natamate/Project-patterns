@@ -44,7 +44,7 @@ namespace ACLDatabase.Company.DB
             var role1 = new Role {RoleId = "CEO"};
             var role2 = new Role {RoleId = "Accountant", ParentId = role1.RoleId};
             var role3 = new Role {RoleId = "Programist", ParentId = role2.RoleId};
-            var role4 = new Role {RoleId = "Intern", ParentId = role3.RoleId};
+            var role4 = new Role {RoleId = "Intern", ParentId = role2.RoleId};
 
             //test roles
             var testRole = new Role() { RoleId = "Test" };

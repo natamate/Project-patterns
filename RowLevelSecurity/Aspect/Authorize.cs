@@ -23,7 +23,7 @@ namespace ACLDatabase.Aspect
             var context = args.Arguments.OfType<ModelContext>().FirstOrDefault();
 
             if (user == null || context == null)
-                throw new ArgumentException("Argument usrename and context are required");
+                throw new ArgumentNullException();
 
             context.Authorize(user.Username);
         }
