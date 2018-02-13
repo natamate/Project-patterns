@@ -24,7 +24,7 @@ namespace ACLDatabase.Company.DB
         {
             var createFin = new Financial{Value = val,Employee = e};
             myContext.Financials.Add(createFin);
-
+            myContext.SaveChanges();
 
             return createFin;
         }
@@ -55,10 +55,12 @@ namespace ACLDatabase.Company.DB
             var fin32 = CreateFin(32.0, em32, context);
             var fin4 = CreateFin(4.0, em4, context);
 
+
             AddRowPermition(em1, fin1, context);
 
             AddRowPermition(em2, fin1, context);
             AddRowPermition(em2, fin2, context);
+            AddRowPermition(em2, fin31, context);
 
             AddRowPermition(em31, fin31, context);
 
