@@ -45,6 +45,7 @@ namespace ACLDatabase.Company
             myAuth = myAuthFactory.GetAuthentication(type);
 
             //From UI make a choice for user
+            //TODO make real choise
             var user = _view.GetUser();
 
             //Authenticate user

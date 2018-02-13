@@ -7,17 +7,17 @@
             switch (param)
             {
                 case "1":
-                    return new CompanyUser("Boss_login");
+                    return new CompanyUser("Trinh");
                 case "2":
-                    return new CompanyUser("Accountant_login");
+                    return new CompanyUser("Materek");
                 case "3":
-                    return new CompanyUser("Programist_login");
+                    return new CompanyUser("Jakubowski");
                 case "4":
-                    return new CompanyUser("Intern_login");
+                    return new CompanyUser("Lisiecki");
                 case "5":
-                    return new CompanyUser("Test_login");
+                    return new CompanyUser("Kowalski");
                 default:
-                    return null;
+                    return new CompanyUser("Guset");
             }
             
         }

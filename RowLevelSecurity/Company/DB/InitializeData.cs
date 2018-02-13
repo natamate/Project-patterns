@@ -39,15 +39,13 @@ namespace ACLDatabase.Company.DB
         //Override for seed method which is required by DropCreateDatabaseAlways
         protected override void Seed(CompanyContext context)
         {
-            /*
+            
             var em1 = CreateEmp("Trinh", context);
             var em2 = CreateEmp("Materek", context);
             var em31 = CreateEmp("Jakubowski",context);
             var em32 = CreateEmp("Lisiecki", context);
-            var em33 = CreateEmp("Mrowkojad", context);
             var em4 = CreateEmp("Kowalski", context);
-            */
-            /*
+
             CreateFin(1000.0, em1, context);
             CreateFin(1500.0, em1, context);
             CreateFin(1600.0, em1, context);
@@ -64,15 +62,9 @@ namespace ACLDatabase.Company.DB
             CreateFin(7510.0, em32, context);
             CreateFin(8510.0, em32, context);
 
-            CreateFin(6530.0, em33, context);
-            CreateFin(7530.0, em33, context);
-            CreateFin(8530.0, em33, context);
-
             CreateFin(100.0, em4, context);
             CreateFin(200.0, em4, context);
             CreateFin(3000.0, em4, context);
-            */
-
 
             context.SaveChanges();
         }

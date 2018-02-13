@@ -16,7 +16,7 @@ namespace ACLDatabase.Company
                 var myUi = new ConsoleUi(myDb, drawingStrategy);
                 Database.SetInitializer(new InitializeData());
                 var controller = new CompanyController<CompanyContext>(myUi, myDb);
-
+                
                 while (true)
                 {
                     if (controller.DisplayFinancyFromEmployerView() == 1)
