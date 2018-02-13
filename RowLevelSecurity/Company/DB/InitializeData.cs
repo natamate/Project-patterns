@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using ACLDatabase.Model;
 
 namespace ACLDatabase.Company.DB
@@ -13,8 +14,6 @@ namespace ACLDatabase.Company.DB
             var tmpEmployee = new Employee { Name = name, Role = myRole.RoleId };
             myContext.Employees.Add(tmpEmployee);
 
-            var tmpRole = new RowRoles { RowId = tmpEmployee.RowId, RoleId = myRole.RoleId };
-            myContext.RowRoles.Add(tmpRole);
 
             return tmpEmployee;
         }
@@ -33,13 +32,8 @@ namespace ACLDatabase.Company.DB
         //Override for seed method which is required by DropCreateDatabaseAlways
         protected override void Seed(CompanyContext context)
         {
-            var user1 = new User {Login = "Boss_login"};
-            var user2 = new User {Login = "Accountant_login"};
-            var user3 = new User {Login = "Programist_login"};
-            var user4 = new User {Login = "Intern_login"};
 
             //test users
-            var testUser = new User { Login = "Test_login" };
 
             var role1 = new Role {RoleId = "CEO"};
             var role2 = new Role {RoleId = "Accountant", ParentId = role1.RoleId};
@@ -49,13 +43,8 @@ namespace ACLDatabase.Company.DB
             //test roles
             var testRole = new Role() { RoleId = "Test" };
 
-            user1.Roles.Add(role1);
-            user2.Roles.Add(role2);
-            user3.Roles.Add(role3);
-            user4.Roles.Add(role4);
 
             //test users - adding role to user
-            testUser.Roles.Add(testRole);
 
             var em1 = CreateEmp("Trinh", "CEO", context, role1);
             var em2 = CreateEmp("Materek", "Accountant", context, role2);
@@ -95,12 +84,7 @@ namespace ACLDatabase.Company.DB
             CreateFin(70.0, t1, context, testRole);
             CreateFin(100.0, t1, context, testRole);
 
-            context.Users.Add(user1);
-            context.Users.Add(user2);
-            context.Users.Add(user3);
-            context.Users.Add(user4);
 
-            context.Users.Add(testUser);
 
             context.SaveChanges();
         }

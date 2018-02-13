@@ -7,11 +7,6 @@ namespace ACLDatabase.Model
     //Its parentID references to ID which is directly connect in the tree
     public class Role
     {
-        public Role()
-        {
-            Users = new HashSet<User>();
-        }
-
         [Key]
         [MinLength(3)]
         [MaxLength(20)]
@@ -20,7 +15,5 @@ namespace ACLDatabase.Model
         [MinLength(3)]
         [MaxLength(20)]
         public string ParentId { get; set; }
-
-        public virtual ICollection<User> Users { get; set; }
     }
 }
