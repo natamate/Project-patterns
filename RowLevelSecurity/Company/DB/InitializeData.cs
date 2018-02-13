@@ -39,32 +39,30 @@ namespace ACLDatabase.Company.DB
         //Override for seed method which is required by DropCreateDatabaseAlways
         protected override void Seed(CompanyContext context)
         {
-            
             var em1 = CreateEmp("Trinh", context);
             var em2 = CreateEmp("Materek", context);
             var em31 = CreateEmp("Jakubowski",context);
             var em32 = CreateEmp("Lisiecki", context);
             var em4 = CreateEmp("Kowalski", context);
 
-            CreateFin(1000.0, em1, context);
-            CreateFin(1500.0, em1, context);
-            CreateFin(1600.0, em1, context);
+            CreateParentChildRelation(em1, em2);
+            CreateParentChildRelation(em2, em31);
+            CreateParentChildRelation(em2, em32);
+            CreateParentChildRelation(em31, em4);
 
-            CreateFin(600.0, em2, context);
-            CreateFin(700.0, em2, context);
-            CreateFin(800.0, em2, context);
+            var fin1 = CreateFin(1000.0, em1, context);
+            var fin2 = CreateFin(600.0, em2, context);
+            var fin31 = CreateFin(650.0, em31, context);
+            var fin32 = CreateFin(6510.0, em32, context);
+            var fin4 = CreateFin(100.0, em4, context);
 
-            CreateFin(650.0, em31, context);
-            CreateFin(750.0, em31, context);
-            CreateFin(8500.0, em31, context);
+            AddRowPermition(em1, fin1, context);
+            AddRowPermition(em2, fin2, context);
+            AddRowPermition(em31, fin31, context);
+            AddRowPermition(em32, fin32, context);
 
-            CreateFin(6510.0, em32, context);
-            CreateFin(7510.0, em32, context);
-            CreateFin(8510.0, em32, context);
 
-            CreateFin(100.0, em4, context);
-            CreateFin(200.0, em4, context);
-            CreateFin(3000.0, em4, context);
+            AddRowPermition(em4, fin4, context);
 
             context.SaveChanges();
         }

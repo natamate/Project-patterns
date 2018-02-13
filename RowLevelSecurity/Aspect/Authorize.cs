@@ -13,7 +13,6 @@ namespace ACLDatabase.Aspect
 
         public override void OnEntry(MethodExecutionArgs args)
         {
-            //TODO Podmień user na Role
             var user = args.Arguments.OfType<IUser>().FirstOrDefault();
             var context = args.Arguments.OfType<ModelContext>().FirstOrDefault();
 

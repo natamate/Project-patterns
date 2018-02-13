@@ -1,4 +1,5 @@
-﻿using ACLDatabase.Company.DB;
+﻿using System;
+using ACLDatabase.Company.DB;
 using System.Data.Entity;
 using ACLDatabase.UI;
 
@@ -21,6 +22,7 @@ namespace ACLDatabase.Company
                 {
                     if (controller.DisplayFinancyFromEmployerView() == 1)
                         break;
+                    Console.WriteLine("Koniec wypisywania");
                 }
             }
         }

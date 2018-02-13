@@ -1,11 +1,8 @@
-﻿using ACLDatabase.Company.Auth;
-using ACLDatabase.Model;
+﻿using ACLDatabase.Model;
 using ACLDatabase.UI;
 
 namespace ACLDatabase.Company
 {
-    //Main Class of the program
-    //This class references to component Controller in pattern MVC
     public class CompanyController<T> where T : ModelContext
     {
         private IView _view;
@@ -30,7 +27,6 @@ namespace ACLDatabase.Company
         //if return 0 if ok, return 1 when exit
         public int DisplayFinancyFromEmployerView()
         {
-            IAuthentication<T> myAuth;
             var myAuthFactory = new AuthFactory<T>();
             _view.ClearView();
             _view.DrawGreetings();
@@ -42,7 +38,7 @@ namespace ACLDatabase.Company
             //Get type of IAuthentication by Factory
             //1. Normal
             //2. Aspect
-            myAuth = myAuthFactory.GetAuthentication(type);
+            var myAuth = myAuthFactory.GetAuthentication(type);
 
             //From UI make a choice for user
             //TODO make real choise
