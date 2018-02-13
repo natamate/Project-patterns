@@ -14,7 +14,6 @@ namespace ACLDatabase.Company.DB
             var tmpEmployee = new Employee { Name = name, Role = myRole.RoleId };
             myContext.Employees.Add(tmpEmployee);
 
-
             return tmpEmployee;
         }
 
@@ -22,9 +21,6 @@ namespace ACLDatabase.Company.DB
         {
             var tmpEmployee = new Financial{Value = val,Employee = e,EmployeeRefId = e.EmployeeId};
             myContext.Financials.Add(tmpEmployee);
-
-            var tmpRole = new RowRoles { RowId = tmpEmployee.RowId, RoleId = myRole.RoleId };
-            myContext.RowRoles.Add(tmpRole);
 
             return tmpEmployee;
         }
@@ -34,6 +30,7 @@ namespace ACLDatabase.Company.DB
         {
 
             //test users
+            //var testUser = new User { Login = "Test_login" };
 
             var role1 = new Role {RoleId = "CEO"};
             var role2 = new Role {RoleId = "Accountant", ParentId = role1.RoleId};
@@ -45,6 +42,7 @@ namespace ACLDatabase.Company.DB
 
 
             //test users - adding role to user
+            //testUser.Roles.Add(testRole);
 
             var em1 = CreateEmp("Trinh", "CEO", context, role1);
             var em2 = CreateEmp("Materek", "Accountant", context, role2);
@@ -84,7 +82,9 @@ namespace ACLDatabase.Company.DB
             CreateFin(70.0, t1, context, testRole);
             CreateFin(100.0, t1, context, testRole);
 
+            //context.Users.Add(user4);
 
+            //context.Users.Add(testUser);
 
             context.SaveChanges();
         }
