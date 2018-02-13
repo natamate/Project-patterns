@@ -1,4 +1,6 @@
-﻿namespace ACLDatabase.UI
+﻿using ACLDatabase.Company;
+
+namespace ACLDatabase.UI
 {
     public interface IView
     {
@@ -6,7 +8,7 @@
         void ClearView();
         void DrawTable();
         string GetTypeOfConnection();
-        Company.IUser GetUser();
+        IUser GetUser();
         void SetDrawingStrategy(IDrawingStrategy stratefy);
     }
 }

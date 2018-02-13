@@ -1,6 +1,6 @@
 ﻿using System;
-using ACLDatabase.Company.DB;
 using ACLDatabase.Company;
+using ACLDatabase.Company.DB;
 
 namespace ACLDatabase.UI
 {
@@ -92,6 +92,7 @@ namespace ACLDatabase.UI
         {
             Console.WriteLine();
             Console.WriteLine("There are");
+            _strategy.SyncContextWithDb(_context);
             _strategy.DrawSpecificTable(_context);
             Console.ReadLine();
         }
