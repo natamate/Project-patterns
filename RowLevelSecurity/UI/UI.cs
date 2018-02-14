@@ -12,97 +12,144 @@ namespace ACLDatabase.UI
         private IDrawingStrategy _viewStrategy;
         private ISyncContextStrategy _syncStrategy;
 
-        public ConsoleUi(CompanyContext context, IDrawingStrategy viewStrategy, ISyncContextStrategy syncStrategy)
-        {
-            _context = context;
-            _viewStrategy = viewStrategy;
-            _syncStrategy = syncStrategy;
-        }
-
-        public void SetModel(CompanyContext context)
-        {
-            _context = context;
-        }
-        //Clear all components on interface
-        public void ClearView()
-        {
-            Console.Clear();
-        }
-
-        public void SetDrawingStrategy(IDrawingStrategy viewStrategy)
-        {
-            _viewStrategy = viewStrategy;
-        }
-
-        public void SetSynContextStrategy(ISyncContextStrategy syncStrategy)
-        {
-            _syncStrategy = syncStrategy;
-        }
-
-
-        //Title of application
-        public void DrawGreetings()
-        {
-            Console.WriteLine("Wellcome to our application.");
-        }
-
-        //Get type of connection: normal authentication or aspect
-        public string GetTypeOfConnection()
+        public int GetMainInterface()
         {
             while (true)
             {
-                Console.WriteLine("Select type to connect:");
-                Console.WriteLine("0. Exit");
-                Console.WriteLine("1. Normal");
-                Console.WriteLine("2. AOP");
+                Console.Clear();
+                Console.WriteLine("Option?");
+                Console.WriteLine("0. Add role permission to row");
+                Console.WriteLine("1. Remove role permission from row");
+                Console.WriteLine("2. Show financies");
                 var res = Console.ReadLine();
                 switch (res)
                 {
-                    case "1":
-                    case "2":
-                        return res;
                     case "0":
-                        return "exit";
+                        return 0;
+                    case "1":
+                        return 1;
+                    case "2":
+                        return 2;
                     default:
-                        Console.WriteLine("The selection should be a integer from 1 to 2");
+                        Console.WriteLine("Should be a number 0 or 2");
                         continue;
                 }
             }
-            
         }
 
-        //Get user method
-        public IUser GetUser()
+        public int GetTypeInitialization()
         {
-            UserFactory uf = new UserFactory();
             while (true)
             {
-                Console.WriteLine("Login as: ");
-                Console.WriteLine("1. Trinh");
-                Console.WriteLine("2. Materek");
-                Console.WriteLine("3. Jakubowski");
-                Console.WriteLine("4. Lisiecki");
-                Console.WriteLine("5. Kowalski");
+                Console.Clear();
+                Console.WriteLine("Should drop and make default initialization?");
+                Console.WriteLine("0. No");
+                Console.WriteLine("1. Yes");
                 var res = Console.ReadLine();
-                var user = uf.GetUser(res);
-                if (user == null)
+                switch (res)
                 {
-                    Console.Clear();
-                    Console.WriteLine("The selection should be a integer from 1 to 5");
-                    continue;
+                    case "0":
+                        return 0;
+                    case "1":
+                        return 1;
+                    default:
+                        Console.WriteLine("Should be a number 0 or 1");
+                        continue;
                 }
-                return user;
             }
         }
 
-        //print result on UI stream
-        public void DrawTable()
+    public ConsoleUi(CompanyContext context, IDrawingStrategy viewStrategy, ISyncContextStrategy syncStrategy)
+    {
+        _context = context;
+        _viewStrategy = viewStrategy;
+        _syncStrategy = syncStrategy;
+    }
+
+    public void SetModel(CompanyContext context)
+    {
+        _context = context;
+    }
+    //Clear all components on interface
+    public void ClearView()
+    {
+        Console.Clear();
+    }
+
+    public void SetDrawingStrategy(IDrawingStrategy viewStrategy)
+    {
+        _viewStrategy = viewStrategy;
+    }
+
+    public void SetSynContextStrategy(ISyncContextStrategy syncStrategy)
+    {
+        _syncStrategy = syncStrategy;
+    }
+
+
+    //Title of application
+    public void DrawGreetings()
+    {
+        Console.WriteLine("Wellcome to our application.");
+    }
+
+    //Get type of connection: normal authentication or aspect
+    public string GetTypeOfConnection()
+    {
+        while (true)
         {
-            Console.WriteLine();
-            Console.WriteLine("There are");
-            _syncStrategy.SyncContextWithDb(_context);
-            _viewStrategy.DrawSpecificTable(_context);
-            Console.ReadLine();
+            Console.WriteLine("Select type to connect:");
+            Console.WriteLine("0. Exit");
+            Console.WriteLine("1. Normal");
+            Console.WriteLine("2. AOP");
+            var res = Console.ReadLine();
+            switch (res)
+            {
+                case "1":
+                case "2":
+                    return res;
+                case "0":
+                    return "exit";
+                default:
+                    Console.WriteLine("The selection should be a integer from 1 to 2");
+                    continue;
+            }
+        }
+
+    }
+
+    //Get user method
+    public IUser GetUser()
+    {
+        UserFactory uf = new UserFactory();
+        while (true)
+        {
+            Console.WriteLine("Login as: ");
+            Console.WriteLine("1. Trinh");
+            Console.WriteLine("2. Materek");
+            Console.WriteLine("3. Jakubowski");
+            Console.WriteLine("4. Lisiecki");
+            Console.WriteLine("5. Kowalski");
+            var res = Console.ReadLine();
+            var user = uf.GetUser(res);
+            if (user == null)
+            {
+                Console.Clear();
+                Console.WriteLine("The selection should be a integer from 1 to 5");
+                continue;
+            }
+            return user;
         }
     }
+
+    //print result on UI stream
+    public void DrawTable()
+    {
+        Console.WriteLine();
+        Console.WriteLine("There are");
+        _syncStrategy.SyncContextWithDb(_context);
+        _viewStrategy.DrawSpecificTable(_context);
+        Console.ReadLine();
+    }
+}
 }

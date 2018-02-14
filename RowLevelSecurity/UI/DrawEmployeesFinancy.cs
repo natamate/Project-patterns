@@ -7,7 +7,7 @@ namespace ACLDatabase.UI
     {
         public void DrawSpecificTable(CompanyContext context)
         {
-            
+            //var tmpEmployee = (dynamic)null;
             foreach (var tmpEmployee in context.Employees)
             {
                 //printing employees table
@@ -15,7 +15,7 @@ namespace ACLDatabase.UI
                     "Id", "Name", "RoleId");
                 Console.WriteLine("------------------------------------------------");
                 Console.WriteLine("{0,-4} {1,-10} {2,-15}",
-                    tmpEmployee.EmployeeId, tmpEmployee.Name, tmpEmployee?.Role?.RoleId);
+                    tmpEmployee.EmployeeId, tmpEmployee.Name, tmpEmployee.Role?.RoleId);
                 Console.WriteLine("------------------------------------------------");
 
                 //printing financials table
