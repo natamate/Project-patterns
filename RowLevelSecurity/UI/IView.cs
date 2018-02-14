@@ -9,6 +9,7 @@ namespace ACLDatabase.UI
         void DrawTable();
         string GetTypeOfConnection();
         IUser GetUser();
-        void SetDrawingStrategy(IDrawingStrategy stratefy);
+        void SetDrawingStrategy(IDrawingStrategy strategy);
+        void SetSynContextStrategy(ISyncContextStrategy strategy);
     }
 }

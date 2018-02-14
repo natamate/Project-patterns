@@ -97,7 +97,9 @@
     <Compile Include="Model\ModelContext.cs" />
     <Compile Include="UI\DrawEmployeesFinancy.cs" />
     <Compile Include="UI\IDrawingStrategy.cs" />
+    <Compile Include="UI\ISyncContextStrategy.cs" />
     <Compile Include="UI\IView.cs" />
+    <Compile Include="UI\SyncContextRefresh.cs" />
     <Compile Include="UI\UI.cs" />
   </ItemGroup>
   <ItemGroup>

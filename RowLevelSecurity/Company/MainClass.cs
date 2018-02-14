@@ -7,6 +7,26 @@ namespace ACLDatabase.Company
 {
     public class MainClass
     {
+        public static void DbInitialization()
+        {
+            Console.Clear();
+            Console.WriteLine("Should drop and make default initialization?");
+            Console.WriteLine("0. No");
+            Console.WriteLine("1. Yes");
+            var res = Console.ReadLine();
+            switch (res)
+            {
+                case "0":
+                    return;
+                case "1":
+                    Database.SetInitializer(new InitializeData());
+                    return;
+                default:
+                    DbInitialization();
+                    return;
+            }
+        }
+
         public static void Main(string[] args)
         {
             //Main program
@@ -14,8 +34,10 @@ namespace ACLDatabase.Company
             {
                 //Declaration for UI, Database, Model and IAuthentication
                 var drawingStrategy = new DrawEmployeesFinancy();
-                var myUi = new ConsoleUi(myDb, drawingStrategy);
-                Database.SetInitializer(new InitializeData());
+                var syncStrategy = new SyncContextRefresh();
+                DbInitialization();
+                var myUi = new ConsoleUi(myDb, drawingStrategy, syncStrategy);
+             
                 var controller = new CompanyController<CompanyContext>(myUi, myDb);
                 
                 while (true)

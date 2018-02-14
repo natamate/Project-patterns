@@ -9,12 +9,14 @@ namespace ACLDatabase.UI
     public class ConsoleUi : IView
     {
         private CompanyContext _context;
-        private IDrawingStrategy _strategy;
+        private IDrawingStrategy _viewStrategy;
+        private ISyncContextStrategy _syncStrategy;
 
-        public ConsoleUi(CompanyContext context, IDrawingStrategy strategy)
+        public ConsoleUi(CompanyContext context, IDrawingStrategy viewStrategy, ISyncContextStrategy syncStrategy)
         {
             _context = context;
-            _strategy = strategy;
+            _viewStrategy = viewStrategy;
+            _syncStrategy = syncStrategy;
         }
 
         public void SetModel(CompanyContext context)
@@ -27,10 +29,16 @@ namespace ACLDatabase.UI
             Console.Clear();
         }
 
-        public void SetDrawingStrategy(IDrawingStrategy strategy)
+        public void SetDrawingStrategy(IDrawingStrategy viewStrategy)
         {
-            _strategy = strategy;
+            _viewStrategy = viewStrategy;
         }
+
+        public void SetSynContextStrategy(ISyncContextStrategy syncStrategy)
+        {
+            _syncStrategy = syncStrategy;
+        }
+
 
         //Title of application
         public void DrawGreetings()
@@ -92,8 +100,8 @@ namespace ACLDatabase.UI
         {
             Console.WriteLine();
             Console.WriteLine("There are");
-            _strategy.SyncContextWithDb(_context);
-            _strategy.DrawSpecificTable(_context);
+            _syncStrategy.SyncContextWithDb(_context);
+            _viewStrategy.DrawSpecificTable(_context);
             Console.ReadLine();
         }
     }
